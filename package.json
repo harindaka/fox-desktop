@@ -1,12 +1,28 @@
 {
-  "name": "node-fox-client",
+  "name": "electron-quick-start",
   "version": "1.0.0",
-  "description": "A Fox Radio 91.4 FM Client developed using NodeJS",
-  "main": "index.html",
+  "description": "A minimal Electron application",
+  "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "electron main.js"
   },
-  "author": "Hemal Harindaka",
-  "license": "MIT"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/electron/electron-quick-start.git"
+  },
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial"
+  ],
+  "author": "GitHub",
+  "license": "CC0-1.0",
+  "bugs": {
+    "url": "https://github.com/electron/electron-quick-start/issues"
+  },
+  "homepage": "https://github.com/electron/electron-quick-start#readme",
+  "devDependencies": {
+    "electron-prebuilt": "^0.37.8"
+  }
 }
