@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello World!</title>
+  </head>
+  <body>
+    <audio id="audio">
+        <source src="" type="audio/mpeg" />
+    </audio>
+    <button id="btnPlay">Play</button>
+    <button id="btnStop">Stop</button>
+
+    <script type="application/javascript">
+        // run on page load
+        var btnPlay = document.getElementById('btnPlay');
+        var btnStop = document.getElementById('btnStop');
+        var audio = document.getElementById('audio');
+
+        var onPlay = function() {
+            alert('play');
+            audio.src = "http://72.46.136.154:7061/;stream.mp3";
+            audio.load();
+            audio.play(); // audio will load and then play
+            alert('played');
+        };
+        var onStop = function() {
+            alert('stop');
+            audio.pause();
+            audio.currentTime = 0;
+            audio.src = '';
+            alert('stopped');
+        };
+
+        btnPlay.addEventListener('click', onPlay, false);
+        btnStop.addEventListener('click', onStop, false);
+    </script>
+
+  </body>
+</html>
