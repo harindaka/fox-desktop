@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Hello World!</title>
+    <title>Fox 91.4 Desktop Client</title>
     <link rel="stylesheet" type="text/css" href="css/site.css">
   </head>
   <body class="body_background">
-    <h1 class="heading,randomFontColor" align="center">Fox 91.4</h1>
-    
+    <div class="heading">
+        <h1 class="randomFontColor" align="center">Fox 91.4</h1>
+    </div>
     <audio id="audio">
         <source src="" type="audio/mpeg" />
     </audio>
@@ -44,16 +45,16 @@
 
         btnPlay.addEventListener('click', onPlayPause, false);
         
-        var bgImageNumber = 5;
+        var bgImageNumber = 2;
         document.body.style.backgroundImage = 'url("images/visuals/5.gif")';
                 
         var backgroundChangeHandle = setInterval(function (){
             bgImageNumber += 1;
-            if(bgImageNumber > 14){
+            if(bgImageNumber > 13){
                 bgImageNumber = 1;
             }
             document.body.style.backgroundImage = 'url("images/visuals/' + bgImageNumber + '.gif")';
-        }, 5000);
+        }, 60000);
     </script>
 
   </body>
