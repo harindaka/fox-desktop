@@ -2,37 +2,45 @@
 <html>
   <head>
     <title>Hello World!</title>
+    <link rel="stylesheet" type="text/css" href="css/site.css">
   </head>
-  <body>
+  <body class="body_background">
     <audio id="audio">
         <source src="" type="audio/mpeg" />
     </audio>
-    <button id="btnPlay">Play</button>
-    <button id="btnStop">Stop</button>
-
+        
+    <div id="container_button">
+        <div id="hole">
+            <div id="button">
+                <div id="triangle"></div>
+                <div id="lighter_triangle"></div>
+                <div id="darker_triangle"></div>
+            </div>
+        </div>
+    </div> 
+       
+        
     <script type="application/javascript">
         // run on page load
-        var btnPlay = document.getElementById('btnPlay');
-        var btnStop = document.getElementById('btnStop');
+        
+        var btnPlay = document.getElementById('button');
         var audio = document.getElementById('audio');
+        var streamUrl = "http://72.46.136.154:7061/;stream.mp3";
 
-        var onPlay = function() {
-            alert('play');
-            audio.src = "http://72.46.136.154:7061/;stream.mp3";
-            audio.load();
-            audio.play(); // audio will load and then play
-            alert('played');
-        };
-        var onStop = function() {
-            alert('stop');
-            audio.pause();
-            audio.currentTime = 0;
-            audio.src = '';
-            alert('stopped');
+        var onPlayPause = function() {
+            if(audio.src !== streamUrl){        
+                audio.src = streamUrl;
+                audio.load();
+                audio.play();
+            }
+            else{                
+                audio.pause();
+                audio.currentTime = 0;
+                audio.src = '';
+            }
         };
 
-        btnPlay.addEventListener('click', onPlay, false);
-        btnStop.addEventListener('click', onStop, false);
+        btnPlay.addEventListener('click', onPlayPause, false);
     </script>
 
   </body>

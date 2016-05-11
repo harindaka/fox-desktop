@@ -1,7 +1,9 @@
-body {
-    background-image: url("../images/visuals/12.gif");
+.body_background {
+    background-image: url("../images/visuals/5.gif");
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
 }
 
 #container_button {    
