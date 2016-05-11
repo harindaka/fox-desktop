@@ -9,6 +9,10 @@ const BrowserWindow = electron.BrowserWindow
 let mainWindow
 
 function createWindow () {
+  
+  var path = require('path');
+  var iconPath = path.join(__dirname, 'images/fox.png')
+  
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 800, 
@@ -16,8 +20,11 @@ function createWindow () {
     minWidth: 800,
     minHeight: 600,
     title: "Fox 91.4 Desktop Client",
-    autoHideMenuBar: true
+    autoHideMenuBar: true,
+    icon: iconPath
   })
+  
+  //mainWindow.setOverlayIcon(iconPath, "unsaved changes");
   
   mainWindow.setMenu(null);
 

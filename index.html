@@ -46,11 +46,11 @@
         btnPlay.addEventListener('click', onPlayPause, false);
         
         var bgImageNumber = 2;
-        document.body.style.backgroundImage = 'url("images/visuals/5.gif")';
+        document.body.style.backgroundImage = 'url("images/visuals/' + bgImageNumber + '.gif")';
                 
         var backgroundChangeHandle = setInterval(function (){
             bgImageNumber += 1;
-            if(bgImageNumber > 13){
+            if(bgImageNumber > 14){
                 bgImageNumber = 1;
             }
             document.body.style.backgroundImage = 'url("images/visuals/' + bgImageNumber + '.gif")';
