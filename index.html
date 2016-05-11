@@ -5,6 +5,8 @@
     <link rel="stylesheet" type="text/css" href="css/site.css">
   </head>
   <body class="body_background">
+    <h1 class="heading,randomFontColor" align="center">Fox 91.4</h1>
+    
     <audio id="audio">
         <source src="" type="audio/mpeg" />
     </audio>
@@ -41,6 +43,17 @@
         };
 
         btnPlay.addEventListener('click', onPlayPause, false);
+        
+        var bgImageNumber = 5;
+        document.body.style.backgroundImage = 'url("images/visuals/5.gif")';
+                
+        var backgroundChangeHandle = setInterval(function (){
+            bgImageNumber += 1;
+            if(bgImageNumber > 14){
+                bgImageNumber = 1;
+            }
+            document.body.style.backgroundImage = 'url("images/visuals/' + bgImageNumber + '.gif")';
+        }, 5000);
     </script>
 
   </body>
