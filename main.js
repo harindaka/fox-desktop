@@ -26,7 +26,7 @@ function createWindow () {
   
   //mainWindow.setOverlayIcon(iconPath, "unsaved changes");
   
-  mainWindow.setMenu(null);
+  //mainWindow.setMenu(null);
 
   // and load the index.html of the app.
   mainWindow.loadURL('file://' + __dirname + '/index.html')

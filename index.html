@@ -2,11 +2,13 @@
 <html>
   <head>
     <title>Fox 91.4 Desktop Client</title>
+    <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" type="text/css" href="css/site.css">
   </head>
-  <body class="body_background">
+  <body class="body_background">    
+    <script src="./js/jquery-2.2.3.js" onload="window.$ = window.jQuery = module.exports;"></script>
     <div class="heading">
-        <h1 class="randomFontColor" align="center">Fox 91.4</h1>
+        <h1 id="heading" align="center">Fox 91.4</h1>
     </div>
     <audio id="audio">
         <source src="" type="audio/mpeg" />
@@ -24,37 +26,73 @@
        
         
     <script type="application/javascript">
-        // run on page load
-        //https://drive.google.com/uc?export=download&id=0B1FTb0VQ85FHc1dBM2xCMm9EdE0
-        var btnPlay = document.getElementById('button');
-        var audio = document.getElementById('audio');
-        var streamUrl = "http://72.46.136.154:7061/;stream.mp3";
 
-        var onPlayPause = function() {
-            if(audio.src !== streamUrl){        
-                audio.src = streamUrl;
-                audio.load();
-                audio.play();
-            }
-            else{                
-                audio.pause();
-                audio.currentTime = 0;
-                audio.src = '';
-            }
-        };
+        $(document).ready(function () {
+  
+            // run on page load
+            //https://drive.google.com/uc?export=download&id=0B1FTb0VQ85FHc1dBM2xCMm9EdE0
+            var btnPlay = document.getElementById('button');
+            var audio = document.getElementById('audio');
+            var heading = document.getElementById("heading");  
+            var streamUrl = "http://72.46.136.154:7061/;stream.mp3";
 
-        btnPlay.addEventListener('click', onPlayPause, false);
+            $.fn.extend({
+                animateCss: function (animationName, loop) {
+                    var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+                    if(loop){
+                        $(this).addClass('animated ' + animationName);    
+                    }
+                    else{
+                        $(this).addClass('animated ' + animationName).one(animationEnd, function() {
+                            $(this).removeClass('animated ' + animationName);
+                        });
+                    }
+                }
+            });
+            
+            var backgroundChangeHandle = null;
+            var bgImageNumber = 2;
+            btnPlay.addEventListener('click', function() {
+                if(audio.src !== streamUrl){        
+                    audio.src = streamUrl;
+                    audio.load();
+                    audio.play();
+                }
+                else{ 
+                    heading.className = '';               
+                    audio.pause();
+                    audio.currentTime = 0;
+                    audio.src = '';
+
+                    clearInterval(backgroundChangeHandle);
+                    document.body.style.backgroundImage = '';
+                }
+            }, false);
+                    
+            audio.addEventListener('play', function(){            
+                $(heading).animateCss('pulse', true); 
+            });
+
+            audio.addEventListener('playing', function(){            
+                $(heading).animateCss('tada', true);  
+
+                document.body.style.backgroundImage = 'url("images/visuals/' + bgImageNumber + '.gif")';                
+                    backgroundChangeHandle = setInterval(function (){                
+                        if(bgImageNumber > 14){
+                            bgImageNumber = 1;
+                        }
+                        document.body.style.backgroundImage = 'url("images/visuals/' + bgImageNumber + '.gif")';
+                        bgImageNumber += 1;
+                    }, 60000);                
+            });
+
+            audio.addEventListener('error', function(){
+
+            });
+
         
-        var bgImageNumber = 2;
-        document.body.style.backgroundImage = 'url("images/visuals/' + bgImageNumber + '.gif")';
-                
-        var backgroundChangeHandle = setInterval(function (){
-            bgImageNumber += 1;
-            if(bgImageNumber > 14){
-                bgImageNumber = 1;
-            }
-            document.body.style.backgroundImage = 'url("images/visuals/' + bgImageNumber + '.gif")';
-        }, 60000);
+        });    
+        
     </script>
 
   </body>
