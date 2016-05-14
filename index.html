@@ -45,32 +45,31 @@
             var controlTipsShown = false;
             var streamUrl = null;
             var q = require('q');
+            var localConfig = require('./local-config.js');
             
             q.Promise(function(resolve, reject){
                 var restClient = require('simple-get');            
-                restClient.concat('http://example.com', function (err, res, data) {
+                restClient.concat(localConfig.remoteConfigUrl, function (err, res, data) {
                     try{
                         if (typeof err === 'undefined' || err === null) {
-                            let remoteConfig = JSON.parse(data);
+                            let remoteConfig = JSON.parse(data.toString('utf8'));
                             if(typeof remoteConfig !== 'undefined' && remoteConfig !== null && typeof remoteConfig.streamUrl !== 'undefined' && remoteConfig.streamUrl !== null){
                                 resolve({ isSuccess: true, streamUrl: remoteConfig.streamUrl});
                                 return;
                             }
                         }
-
-                        var localRemoteConfig = require('./remote-config.js');                    
-                        resolve({ isSuccess: false, streamUrl: localRemoteConfig.streamUrl });
+                                       
+                        resolve({ isSuccess: false, streamUrl: localConfig.fallbackStreamUrl });
                     }
-                    catch(e){
-                        var localRemoteConfig = require('./remote-config.js');                    
-                        resolve({ isSuccess: false, streamUrl: localRemoteConfig.streamUrl });
+                    catch(e){                                         
+                        resolve({ isSuccess: false, streamUrl: localConfig.fallbackStreamUrl });
                     }
                 });
             }).then(function (remoteStreamUrlResult) {
                 streamUrl = remoteStreamUrlResult.streamUrl;
 
                 if(!remoteStreamUrlResult.isSuccess){
-                    toastr["error"]("Unable to retrieve remote stream url configuration. Using locally configured stream url instead...");
+                    toastr["warning"]("Unable to retrieve remote stream url setting. Using fallback stream url instead...");
                 }
 
                 $.fn.extend({
@@ -146,8 +145,7 @@
                 toastr["info"]("Hit the button to start streaming awesomeness...");
 
             }).catch(function(e){
-                alert(e);
-                process.exit();
+                toastr["error"]("Oops! An unhandled error occurred. You may need to restart the application. Error details: " + e.message);
             }).done();            
             
         });    
