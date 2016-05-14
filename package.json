@@ -1,5 +1,5 @@
 {
-  "name": "Fox 91.4 Desktop Client",
+  "name": "fox-desktop",
   "version": "1.0.0",
   "description": "A cross platform desktop client for Sri Lanka's Fox 91.4 FM",
   "main": "main.js",
@@ -25,5 +25,9 @@
   "devDependencies": {
     "electron-packager": "^7.0.1",
     "electron-prebuilt": "^0.37.8"
+  },
+  "dependencies": {
+    "jquery": "^2.2.3",
+    "toastr": "^2.1.2"
   }
 }

@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Fox 91.4 Desktop Client</title>
-    <link rel="stylesheet" href="css/animate.css">
-    <link rel="stylesheet" type="text/css" href="css/site.css">
+    <title>Fox 91.4 Desktop Client</title>   
+    
+    <link rel="stylesheet" href="libs/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="libs/fox-desktop/site.css">
+    <link rel="stylesheet" type="text/css" href="node_modules/toastr/build/toastr.css">
   </head>
-  <body class="body_background">    
-    <script src="./js/jquery-2.2.3.js" onload="window.$ = window.jQuery = module.exports;"></script>
+  <body class="body_background">
     <div class="heading">
         <h1 id="heading" align="center">Fox 91.4</h1>
     </div>
@@ -26,15 +27,23 @@
        
         
     <script type="application/javascript">
+        var $ = require('jquery');
+        var jQuery = $;
+        
+        $(document).ready(function () {            
+            
+            var toastr = require('toastr');    
+            toastr.options.preventDuplicates = true;
+            toastr.options.positionClass = "toast-bottom-right";
 
-        $(document).ready(function () {
-  
-            // run on page load
+            var config = require('./config.js');
+
             //https://drive.google.com/uc?export=download&id=0B1FTb0VQ85FHc1dBM2xCMm9EdE0
             var btnPlay = document.getElementById('button');
             var audio = document.getElementById('audio');
             var heading = document.getElementById("heading");  
-            var streamUrl = "http://72.46.136.154:7061/;stream.mp3";
+            var streamUrl = config.streamUrl;
+            var controlTipsShown = false;
 
             $.fn.extend({
                 animateCss: function (animationName, loop) {
@@ -57,6 +66,10 @@
                     audio.src = streamUrl;
                     audio.load();
                     audio.play();
+
+                    if(!controlTipsShown){                        
+                        toastr["info"]("Hit the button again to pause. But why would you even...");
+                    }
                 }
                 else{ 
                     heading.className = '';               
@@ -66,6 +79,11 @@
 
                     clearInterval(backgroundChangeHandle);
                     document.body.style.backgroundImage = '';
+
+                    if(!controlTipsShown){                        
+                        toastr["info"]("You could always hit that button again you know...");
+                        controlTipsShown = true;
+                    }
                 }
             }, false);
                     
@@ -89,8 +107,8 @@
             audio.addEventListener('error', function(){
 
             });
-
-        
+            
+            toastr["info"]("Hit the button to start streaming awesomeness...");
         });    
         
     </script>
