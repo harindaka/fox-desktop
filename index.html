@@ -24,7 +24,8 @@
             </div>
         </div>
     </div> 
-       
+    
+    <div id="menu" class="menu colorAnimatedFont">About</div>   
         
     <script type="application/javascript">
         var $ = require('jquery');
@@ -42,6 +43,7 @@
             var btnPlay = document.getElementById('button');
             var audio = document.getElementById('audio');
             var heading = document.getElementById("heading");  
+            var menu = document.getElementById("menu");  
             var streamUrl = config.streamUrl;
             var controlTipsShown = false;
 
@@ -105,7 +107,12 @@
             });
 
             audio.addEventListener('error', function(){
+                toastr["error"]("Oops! Unable to connect. Please check whether you are properly connected to the internet. If you are, then you may be behind a firewall which is blocking the Fox 91.4 audio stream. That's not cool man. Not cool at all.");
+            });
 
+            menu.addEventListener('click', function(){
+                var aboutMessage = '<a target="_blank" href="https://github.com/harindaka/fox-desktop">Fox Desktop</a></br>An unofficial cross platform streaming client for Sri Lanka\'s Fox 91.4 FM Radio.</br>This program is free software licensed and distributed under <a target="_blank"  href="http://www.gnu.org/licenses/gpl-3.0.en.html">GNU GPL v3</a> with absolutely no warranties.</br>Developed by <a target="_blank" href="https://www.linkedin.com/in/harindaka">Hemal Harindaka</a>';
+                toastr["info"](aboutMessage);
             });
             
             toastr["info"]("Hit the button to start streaming awesomeness...");
