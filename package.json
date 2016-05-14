@@ -30,6 +30,8 @@
   },
   "dependencies": {
     "jquery": "2.2.3",
+    "q": "1.4.1",
+    "simple-get": "2.1.0",
     "toastr": "2.1.2"
   }
 }

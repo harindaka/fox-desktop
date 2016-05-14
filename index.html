@@ -37,87 +37,119 @@
             toastr.options.preventDuplicates = true;
             toastr.options.positionClass = "toast-bottom-right";
 
-            var config = require('./config.js');
-
             //https://drive.google.com/uc?export=download&id=0B1FTb0VQ85FHc1dBM2xCMm9EdE0
             var btnPlay = document.getElementById('button');
             var audio = document.getElementById('audio');
             var heading = document.getElementById("heading");  
             var menu = document.getElementById("menu");  
-            var streamUrl = config.streamUrl;
             var controlTipsShown = false;
-
-            $.fn.extend({
-                animateCss: function (animationName, loop) {
-                    var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
-                    if(loop){
-                        $(this).addClass('animated ' + animationName);    
-                    }
-                    else{
-                        $(this).addClass('animated ' + animationName).one(animationEnd, function() {
-                            $(this).removeClass('animated ' + animationName);
-                        });
-                    }
-                }
-            });
+            var streamUrl = null;
+            var q = require('q');
             
-            var backgroundChangeHandle = null;
-            var bgImageNumber = 2;
-            btnPlay.addEventListener('click', function() {
-                if(audio.src !== streamUrl){        
-                    audio.src = streamUrl;
-                    audio.load();
-                    audio.play();
-
-                    if(!controlTipsShown){                        
-                        toastr["info"]("Hit the button again to pause. But why would you even...");
-                    }
-                }
-                else{ 
-                    heading.className = '';               
-                    audio.pause();
-                    audio.currentTime = 0;
-                    audio.src = '';
-
-                    clearInterval(backgroundChangeHandle);
-                    document.body.style.backgroundImage = '';
-
-                    if(!controlTipsShown){                        
-                        toastr["info"]("You could always hit that button again you know...");
-                        controlTipsShown = true;
-                    }
-                }
-            }, false);
-                    
-            audio.addEventListener('play', function(){            
-                $(heading).animateCss('pulse', true); 
-            });
-
-            audio.addEventListener('playing', function(){            
-                $(heading).animateCss('tada', true);  
-
-                document.body.style.backgroundImage = 'url("images/visuals/' + bgImageNumber + '.gif")';                
-                    backgroundChangeHandle = setInterval(function (){                
-                        if(bgImageNumber > 14){
-                            bgImageNumber = 1;
+            q.Promise(function(resolve, reject){
+                var restClient = require('simple-get');            
+                restClient.concat('http://example.com', function (err, res, data) {
+                    try{
+                        if (typeof err === 'undefined' || err === null) {
+                            let remoteConfig = JSON.parse(data);
+                            if(typeof remoteConfig !== 'undefined' && remoteConfig !== null && typeof remoteConfig.streamUrl !== 'undefined' && remoteConfig.streamUrl !== null){
+                                resolve({ isSuccess: true, streamUrl: remoteConfig.streamUrl});
+                                return;
+                            }
                         }
-                        document.body.style.backgroundImage = 'url("images/visuals/' + bgImageNumber + '.gif")';
-                        bgImageNumber += 1;
-                    }, 60000);                
-            });
 
-            audio.addEventListener('error', function(){
-                if(audio.src === streamUrl){
-                    toastr["error"]("Oops! Unable to connect. Please check whether you are properly connected to the internet. If you are, then you may be behind a firewall which is blocking the Fox 91.4 audio stream. That's not cool man. Not cool at all.");
+                        var localRemoteConfig = require('./remote-config.js');                    
+                        resolve({ isSuccess: false, streamUrl: localRemoteConfig.streamUrl });
+                    }
+                    catch(e){
+                        var localRemoteConfig = require('./remote-config.js');                    
+                        resolve({ isSuccess: false, streamUrl: localRemoteConfig.streamUrl });
+                    }
+                });
+            }).then(function (remoteStreamUrlResult) {
+                streamUrl = remoteStreamUrlResult.streamUrl;
+
+                if(!remoteStreamUrlResult.isSuccess){
+                    toastr["error"]("Unable to retrieve remote stream url configuration. Using locally configured stream url instead...");
                 }
-            });
 
-            menu.addEventListener('click', function(){
-                var aboutMessage = '<a target="_blank" href="https://github.com/harindaka/fox-desktop">Fox Desktop</a></br>An unofficial cross platform streaming client for Sri Lanka\'s Fox 91.4 FM Radio.</br>This program is free software licensed and distributed under <a target="_blank"  href="http://www.gnu.org/licenses/gpl-3.0.en.html">GNU GPL v3</a> with absolutely no warranties.</br>Developed by <a target="_blank" href="https://www.linkedin.com/in/harindaka">Hemal Harindaka</a>';
-                toastr["info"](aboutMessage);
-            });
+                $.fn.extend({
+                    animateCss: function (animationName, loop) {
+                        var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+                        if(loop){
+                            $(this).addClass('animated ' + animationName);    
+                        }
+                        else{
+                            $(this).addClass('animated ' + animationName).one(animationEnd, function() {
+                                $(this).removeClass('animated ' + animationName);
+                            });
+                        }
+                    }
+                });
+                
+                var backgroundChangeHandle = null;
+                var bgImageNumber = 2;
+                btnPlay.addEventListener('click', function() {
+                    if(audio.src !== streamUrl){        
+                        audio.src = streamUrl;
+                        audio.load();
+                        audio.play();
+
+                        if(!controlTipsShown){                        
+                            toastr["info"]("Hit the button again to pause. But why would you even...");
+                        }
+                    }
+                    else{ 
+                        heading.className = '';               
+                        audio.pause();
+                        audio.currentTime = 0;
+                        audio.src = '';
+
+                        clearInterval(backgroundChangeHandle);
+                        document.body.style.backgroundImage = '';
+
+                        if(!controlTipsShown){                        
+                            toastr["info"]("You could always hit that button again you know...");
+                            controlTipsShown = true;
+                        }
+                    }
+                }, false);
+                        
+                audio.addEventListener('play', function(){            
+                    $(heading).animateCss('pulse', true); 
+                });
+
+                audio.addEventListener('playing', function(){            
+                    $(heading).animateCss('tada', true);  
+
+                    document.body.style.backgroundImage = 'url("images/visuals/' + bgImageNumber + '.gif")';                
+                        backgroundChangeHandle = setInterval(function (){                
+                            if(bgImageNumber > 14){
+                                bgImageNumber = 1;
+                            }
+                            document.body.style.backgroundImage = 'url("images/visuals/' + bgImageNumber + '.gif")';
+                            bgImageNumber += 1;
+                        }, 60000);                
+                });
+
+                audio.addEventListener('error', function(){
+                    if(audio.src === streamUrl){
+                        toastr["error"]("Oops! Unable to connect. Please check whether you are properly connected to the internet. If you are, then you may be behind a firewall which is blocking the Fox 91.4 audio stream. That's not cool man. Not cool at all.");
+                    }
+                });
+
+                menu.addEventListener('click', function(){
+                    var aboutMessage = '<a target="_blank" href="https://github.com/harindaka/fox-desktop">Fox Desktop</a></br>An unofficial cross platform streaming client for Sri Lanka\'s Fox 91.4 FM Radio.</br>This program is free software licensed and distributed under <a target="_blank"  href="http://www.gnu.org/licenses/gpl-3.0.en.html">GNU GPL v3</a> with absolutely no warranties.</br>Developed by <a target="_blank" href="https://www.linkedin.com/in/harindaka">Hemal Harindaka</a>';
+                    toastr["info"](aboutMessage);
+                });
+                
+                toastr["info"]("Hit the button to start streaming awesomeness...");
+
+            }).catch(function(e){
+                alert(e);
+                process.exit();
+            }).done();            
             
-            toastr["info"]("Hit the button to start streaming awesomeness...");
         });    
         
     </script>
