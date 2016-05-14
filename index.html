@@ -107,7 +107,9 @@
             });
 
             audio.addEventListener('error', function(){
-                toastr["error"]("Oops! Unable to connect. Please check whether you are properly connected to the internet. If you are, then you may be behind a firewall which is blocking the Fox 91.4 audio stream. That's not cool man. Not cool at all.");
+                if(audio.src === streamUrl){
+                    toastr["error"]("Oops! Unable to connect. Please check whether you are properly connected to the internet. If you are, then you may be behind a firewall which is blocking the Fox 91.4 audio stream. That's not cool man. Not cool at all.");
+                }
             });
 
             menu.addEventListener('click', function(){
