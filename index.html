@@ -51,7 +51,6 @@
             var toastr = require('toastr');    
             toastr.options.preventDuplicates = true;
             toastr.options.positionClass = "toast-bottom-right";
-            toastr.options.newestOnTop = true;
 
             //https://drive.google.com/uc?export=download&id=0B1FTb0VQ85FHc1dBM2xCMm9EdE0
             var btnPlay = document.getElementById('button');
@@ -104,6 +103,13 @@
                         }
                     }
                 });
+
+                var stop = function(){
+                    heading.className = '';               
+                    audio.pause();
+                    audio.currentTime = 0;
+                    audio.src = '';
+                };
                 
                 var backgroundChangeHandle = null;
                 var bgImageNumber = 2;
@@ -111,17 +117,10 @@
                     if(audio.src !== streamUrl){        
                         audio.src = streamUrl;
                         audio.load();
-                        audio.play();
-
-                        if(!controlTipsShown){                        
-                            toastr["info"]("Hit the button again to pause. But why would you even...");
-                        }
+                        audio.play();                        
                     }
                     else{ 
-                        heading.className = '';               
-                        audio.pause();
-                        audio.currentTime = 0;
-                        audio.src = '';
+                        stop();
 
                         clearInterval(backgroundChangeHandle);
                         document.body.style.backgroundImage = '';
@@ -138,6 +137,10 @@
                 });
 
                 audio.addEventListener('playing', function(){            
+                    if(!controlTipsShown){                        
+                            toastr["info"]("Hit the button again to pause. But why would you even...");
+                    }
+
                     $(heading).animateCss('tada', true);  
 
                     document.body.style.backgroundImage = 'url("images/visuals/' + bgImageNumber + '.gif")';                
@@ -152,6 +155,8 @@
 
                 audio.addEventListener('error', function(){
                     if(audio.src === streamUrl){
+                        stop();
+
                         toastr["error"]("Oops! Unable to connect. Please check whether you are properly connected to the internet. If you are, then you may be behind a firewall which is blocking the Fox 91.4 audio stream. That's not cool man. Not cool at all.");
                     }
                 });
