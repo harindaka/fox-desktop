@@ -4,10 +4,20 @@
     <title>Fox 91.4 Desktop Client</title>   
     
     <link rel="stylesheet" href="libs/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="libs/loader/loader.css">
     <link rel="stylesheet" type="text/css" href="libs/fox-desktop/site.css">
     <link rel="stylesheet" type="text/css" href="node_modules/toastr/build/toastr.css">
   </head>
   <body class="body_background">
+        
+    <!--<div id="" class="loader-modal">
+      <div class="loader-modal-overlay">
+      </div>     
+      <div class="loader-vertical-offset">         
+        <div class="loader">Loading...</div>              
+      </div> 
+    </div>-->
+
     <div class="heading">
         <h1 id="heading" align="center">Fox 91.4</h1>
     </div>
@@ -30,9 +40,14 @@
     <script type="application/javascript">
         var $ = require('jquery');
         var jQuery = $;
+
+        var Loader = require('./libs/loader/loader.js');
+        var loader = new Loader('loader');
         
         $(document).ready(function () {            
             
+            loader.show();
+
             var toastr = require('toastr');    
             toastr.options.preventDuplicates = true;
             toastr.options.positionClass = "toast-bottom-right";
@@ -67,6 +82,8 @@
                 });
             }).then(function (remoteStreamUrlResult) {
                 streamUrl = remoteStreamUrlResult.streamUrl;
+
+                loader.close();
 
                 if(!remoteStreamUrlResult.isSuccess){
                     toastr["warning"]("Unable to retrieve remote stream url setting. Using fallback stream url instead...");
@@ -145,7 +162,7 @@
                 toastr["info"]("Hit the button to start streaming awesomeness...");
 
             }).catch(function(e){
-                toastr["error"]("Oops! An unhandled error occurred. You may need to restart the application. Error details: " + e.message);
+                toastr["error"]("Oops! An unhandled error occurred. You may need to restart the application for it to behave as intended. Error details: " + e.message);
             }).done();            
             
         });    
