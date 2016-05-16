@@ -51,6 +51,7 @@
             var toastr = require('toastr');    
             toastr.options.preventDuplicates = true;
             toastr.options.positionClass = "toast-bottom-right";
+            toastr.options.newestOnTop = true;
 
             //https://drive.google.com/uc?export=download&id=0B1FTb0VQ85FHc1dBM2xCMm9EdE0
             var btnPlay = document.getElementById('button');
@@ -64,6 +65,7 @@
             
             q.Promise(function(resolve, reject){
                 var restClient = require('simple-get');            
+                toastr["info"]("Retrieving remote configuration...");
                 restClient.concat(localConfig.remoteConfigUrl, function (err, res, data) {
                     try{
                         if (typeof err === 'undefined' || err === null) {
