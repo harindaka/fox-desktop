@@ -1,0 +1,15 @@
+#!/bin/bash
+set -e
+
+PROJECT_PATH=$(dirname "$(dirname $0)")
+
+VERSION=1.0
+ICON_PATH="$PROJECT_PATH/images/fox.icns"
+
+"$PROJECT_PATH/node_modules/.bin/electron-packager" "$PROJECT_PATH" --platform=darwin --arch=x64 --overwrite --icon="$ICON_PATH" --out="$PROJECT_PATH/bin" --version-string.CompanyName="Hemal Harindaka" --version-string.ProductName="Fox 91.4 Desktop Client" --version-string.ProductVersion="$VERSION" --ignore="$PROJECT_PATH/bin" --ignore="$PROJECT_PATH/node_modules/electron-packager" --ignore="$PROJECT_PATH/node_modules/electron-prebuilt" --ignore="$PROJECT_PATH/build-tools" 
+mv "$PROJECT_PATH/bin/fox-desktop-darwin-x64" "$PROJECT_PATH/bin/fox-desktop-darwin-x64-temp"
+mkdir "$PROJECT_PATH/bin/fox-desktop-darwin-x64"
+mv "$PROJECT_PATH/bin/fox-desktop-darwin-x64-temp" "$PROJECT_PATH/bin/fox-desktop-darwin-x64/bin"
+cp -f "$PROJECT_PATH/build-tools/foxdesktop" "$PROJECT_PATH/bin/fox-desktop-darwin-x64/"
+node "$PROJECT_PATH/build-tools/build-helper-zip.js" "$PROJECT_PATH/bin/fox-desktop-darwin-x64" "$PROJECT_PATH/bin/fox-desktop-darwin-x64.zip"
+
