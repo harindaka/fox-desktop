@@ -5,11 +5,14 @@ PROJECT_PATH=$(dirname "$(dirname $0)")
 
 VERSION=1.0
 ICON_PATH="$PROJECT_PATH/images/fox.icns"
+OUT_PATH="$PROJECT_PATH/bin"
 
-"$PROJECT_PATH/node_modules/.bin/electron-packager" "$PROJECT_PATH" --platform=darwin --arch=x64 --overwrite --icon="$ICON_PATH" --out="$PROJECT_PATH/bin" --version-string.CompanyName="Hemal Harindaka" --version-string.ProductName="Fox 91.4 Desktop Client" --version-string.ProductVersion="$VERSION" --ignore="$PROJECT_PATH/bin" --ignore="$PROJECT_PATH/node_modules/electron-packager" --ignore="$PROJECT_PATH/node_modules/electron-prebuilt" --ignore="$PROJECT_PATH/build-tools" 
-mv "$PROJECT_PATH/bin/fox-desktop-darwin-x64" "$PROJECT_PATH/bin/fox-desktop-darwin-x64-temp"
-mkdir "$PROJECT_PATH/bin/fox-desktop-darwin-x64"
-mv "$PROJECT_PATH/bin/fox-desktop-darwin-x64-temp" "$PROJECT_PATH/bin/fox-desktop-darwin-x64/bin"
-cp -f "$PROJECT_PATH/build-tools/foxdesktop" "$PROJECT_PATH/bin/fox-desktop-darwin-x64/"
-node "$PROJECT_PATH/build-tools/build-helper-zip.js" "$PROJECT_PATH/bin/fox-desktop-darwin-x64" "$PROJECT_PATH/bin/fox-desktop-v$VERSION-darwin-x64.zip"
+rm -rf "$OUT_PATH"
+
+"$PROJECT_PATH/node_modules/.bin/electron-packager" "$PROJECT_PATH" --platform=darwin --arch=x64 --overwrite --icon="$ICON_PATH" --out="$OUT_PATH" --version-string.CompanyName="Hemal Harindaka" --version-string.ProductName="Fox 91.4 Desktop Client" --version-string.ProductVersion="$VERSION" --ignore="$OUT_PATH" --ignore="$PROJECT_PATH/node_modules/electron-packager" --ignore="$PROJECT_PATH/node_modules/electron-prebuilt" --ignore="$PROJECT_PATH/build-tools" 
+mv "$OUT_PATH/fox-desktop-darwin-x64" "$OUT_PATH/fox-desktop-darwin-x64-temp"
+mkdir "$OUT_PATH/fox-desktop-darwin-x64"
+mv "$OUT_PATH/fox-desktop-darwin-x64-temp" "$OUT_PATH/fox-desktop-darwin-x64/bin"
+cp -f "$PROJECT_PATH/build-tools/foxdesktop" "$OUT_PATH/fox-desktop-darwin-x64/"
+node "$PROJECT_PATH/build-tools/build-helper-zip.js" "$OUT_PATH/fox-desktop-darwin-x64" "$OUT_PATH/fox-desktop-v$VERSION-darwin-x64.zip"
 
