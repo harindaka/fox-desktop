@@ -32,6 +32,8 @@
         <div class="menuSeparator"></div>
         <div id="sourceMenu" class="menuItem" title="Project Website"><img src="images/github.png" width="20px" height="20px"></div>
         <div class="menuSeparator"></div>
+        <div id="reportBugMenu" class="menuItem" title="Report a Bug"><img src="images/bug.png" width="20px" height="20px"></div>
+        <div class="menuSeparator"></div>
         <div id="licenseMenu" class="menuItem" title="Read License"><img src="images/license.png" width="20px" height="20px"></div>
         <div class="menuSeparator"></div>
         <div id="likeMenu" class="menuItem" title="Like on Facebook"><img src="images/fblike.png" width="50px" height="20px"></div>
@@ -65,6 +67,7 @@
             var heading = document.getElementById("heading");  
             var aboutMenu = document.getElementById("aboutMenu");
             var sourceMenu = document.getElementById("sourceMenu");
+            var reportBugMenu = document.getElementById("reportBugMenu");
             var licenseMenu = document.getElementById("licenseMenu");
             var likeMenu = document.getElementById("likeMenu");
             var fbShareMenu = document.getElementById("fbShareMenu");
@@ -195,6 +198,10 @@
 
                 sourceMenu.addEventListener('click', function(){
                     open(config.projectUrl);
+                });
+
+                reportBugMenu.addEventListener('click', function(){
+                    open(config.issuesUrl);
                 });
 
                 licenseMenu.addEventListener('click', function(){

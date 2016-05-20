@@ -2,6 +2,7 @@
     "streamUrl": "http://72.46.136.154:7061/;stream.mp3",
     "authorUrl": "https://www.linkedin.com/in/harindaka",
     "projectUrl": "https://github.com/harindaka/fox-desktop",
+    "issuesUrl": "https://github.com/harindaka/fox-desktop/issues",
     "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.txt",
     "fbPageUrl": "https://www.facebook.com/foxdesktop",
     "fbShareUrl": "https://www.facebook.com/sharer/sharer.php?u=https%3A//www.facebook.com/foxdesktop/",
