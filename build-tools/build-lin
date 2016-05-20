@@ -11,12 +11,12 @@ mv "$PROJECT_PATH/bin/fox-desktop-linux-ia32" "$PROJECT_PATH/bin/fox-desktop-lin
 mkdir "$PROJECT_PATH/bin/fox-desktop-linux-ia32"
 mv "$PROJECT_PATH/bin/fox-desktop-linux-ia32-temp" "$PROJECT_PATH/bin/fox-desktop-linux-ia32/bin"
 cp -f "$PROJECT_PATH/build-tools/foxdesktop" "$PROJECT_PATH/bin/fox-desktop-linux-ia32/"
-node "$PROJECT_PATH/build-tools/build-helper-zip.js" "$PROJECT_PATH/bin/fox-desktop-linux-ia32" "$PROJECT_PATH/bin/fox-desktop-linux-ia32.zip"
+node "$PROJECT_PATH/build-tools/build-helper-zip.js" "$PROJECT_PATH/bin/fox-desktop-linux-ia32" "$PROJECT_PATH/bin/fox-desktop-v$VERSION-linux-ia32.zip"
 
 "$PROJECT_PATH/node_modules/.bin/electron-packager" "$PROJECT_PATH" --platform=linux --arch=x64 --overwrite --icon="$ICON_PATH" --out="$PROJECT_PATH/bin" --version-string.CompanyName="Hemal Harindaka" --version-string.ProductName="Fox 91.4 Desktop Client" --version-string.ProductVersion="$VERSION" --ignore="$PROJECT_PATH/bin" --ignore="$PROJECT_PATH/node_modules/electron-packager" --ignore="$PROJECT_PATH/node_modules/electron-prebuilt" --ignore="$PROJECT_PATH/build-tools" 
 mv "$PROJECT_PATH/bin/fox-desktop-linux-x64" "$PROJECT_PATH/bin/fox-desktop-linux-x64-temp"
 mkdir "$PROJECT_PATH/bin/fox-desktop-linux-x64"
 mv "$PROJECT_PATH/bin/fox-desktop-linux-x64-temp" "$PROJECT_PATH/bin/fox-desktop-linux-x64/bin"
 cp -f "$PROJECT_PATH/build-tools/foxdesktop" "$PROJECT_PATH/bin/fox-desktop-linux-x64/"
-node "$PROJECT_PATH/build-tools/build-helper-zip.js" "$PROJECT_PATH/bin/fox-desktop-linux-x64" "$PROJECT_PATH/bin/fox-desktop-linux-x64.zip"
+node "$PROJECT_PATH/build-tools/build-helper-zip.js" "$PROJECT_PATH/bin/fox-desktop-linux-x64" "$PROJECT_PATH/bin/fox-desktop-v$VERSION-linux-x64.zip"
 

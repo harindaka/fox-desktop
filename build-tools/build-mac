@@ -11,5 +11,5 @@ mv "$PROJECT_PATH/bin/fox-desktop-darwin-x64" "$PROJECT_PATH/bin/fox-desktop-dar
 mkdir "$PROJECT_PATH/bin/fox-desktop-darwin-x64"
 mv "$PROJECT_PATH/bin/fox-desktop-darwin-x64-temp" "$PROJECT_PATH/bin/fox-desktop-darwin-x64/bin"
 cp -f "$PROJECT_PATH/build-tools/foxdesktop" "$PROJECT_PATH/bin/fox-desktop-darwin-x64/"
-node "$PROJECT_PATH/build-tools/build-helper-zip.js" "$PROJECT_PATH/bin/fox-desktop-darwin-x64" "$PROJECT_PATH/bin/fox-desktop-darwin-x64.zip"
+node "$PROJECT_PATH/build-tools/build-helper-zip.js" "$PROJECT_PATH/bin/fox-desktop-darwin-x64" "$PROJECT_PATH/bin/fox-desktop-v$VERSION-darwin-x64.zip"
 
