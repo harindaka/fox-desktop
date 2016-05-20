@@ -17,8 +17,17 @@
     position: absolute;
     bottom: 10px;
     left: 10px;
-    cursor: pointer; 
+}
+
+.menuItem {
+    cursor: pointer;     
     cursor: hand;
+    display: inline-block;
+}
+
+.menuSeparator{
+    width: 5px;
+    display: inline-block;
 }
 
 h1 {

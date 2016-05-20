@@ -9,15 +9,7 @@
     <link rel="stylesheet" type="text/css" href="node_modules/toastr/build/toastr.css">
   </head>
   <body class="body_background">
-        
-    <!--<div id="" class="loader-modal">
-      <div class="loader-modal-overlay">
-      </div>     
-      <div class="loader-vertical-offset">         
-        <div class="loader">Loading...</div>              
-      </div> 
-    </div>-->
-
+    
     <div class="heading">
         <h1 id="heading" align="center">Fox 91.4</h1>
     </div>
@@ -35,59 +27,90 @@
         </div>
     </div> 
     
-    <div id="menu" class="menu colorAnimatedFont">About</div>   
+    <div class="menu">
+        <div id="aboutMenu" class="menuItem" title="Author"><img src="images/developer.png" width="80px" height="80px"></div>
+        <div class="menuSeparator"></div>
+        <div id="sourceMenu" class="menuItem" title="Project Website"><img src="images/github.png" width="20px" height="20px"></div>
+        <div class="menuSeparator"></div>
+        <div id="licenseMenu" class="menuItem" title="Read License"><img src="images/license.png" width="20px" height="20px"></div>
+        <div class="menuSeparator"></div>
+        <div id="likeMenu" class="menuItem" title="Like on Facebook"><img src="images/fblike.png" width="50px" height="20px"></div>
+        <div class="menuSeparator"></div>
+        <div id="fbShareMenu" class="menuItem" title="Share on Facebook"><img src="images/facebook.png" width="20px" height="20px"></div>
+        <div class="menuSeparator"></div>
+        <div id="twitterShareMenu" class="menuItem" title="Share on Twitter"><img src="images/twitter.png" width="20px" height="20px"></div>
+        <div class="menuSeparator"></div>
+        <div id="gplusShareMenu" class="menuItem" title="Share on Google Plus"><img src="images/gplus.png" width="20px" height="20px"></div>
+        <div class="menuSeparator"></div>
+        <div id="linkedShareMenu" class="menuItem" title="Share on LinkedIn"><img src="images/linkedin.png" width="20px" height="20px"></div>
+    </div>   
         
     <script type="application/javascript">
-        var $ = require('jquery');
-        var jQuery = $;
-
+        
         var Loader = require('./libs/loader/loader.js');
         var loader = new Loader('loader');
+        loader.show();
+
+        var $ = require('jquery');
+        var jQuery = $;
         
         $(document).ready(function () {            
             
-            loader.show();
-
             var toastr = require('toastr');    
             toastr.options.preventDuplicates = true;
             toastr.options.positionClass = "toast-bottom-right";
 
-            //https://drive.google.com/uc?export=download&id=0B1FTb0VQ85FHc1dBM2xCMm9EdE0
             var btnPlay = document.getElementById('button');
             var audio = document.getElementById('audio');
             var heading = document.getElementById("heading");  
-            var menu = document.getElementById("menu");  
-            var controlTipsShown = false;
-            var streamUrl = null;
+            var aboutMenu = document.getElementById("aboutMenu");
+            var sourceMenu = document.getElementById("sourceMenu");
+            var licenseMenu = document.getElementById("licenseMenu");
+            var likeMenu = document.getElementById("likeMenu");
+            var fbShareMenu = document.getElementById("fbShareMenu");
+            var twitterShareMenu = document.getElementById("twitterShareMenu");
+            var gplusShareMenu = document.getElementById("gplusShareMenu");
+            var linkedShareMenu = document.getElementById("linkedShareMenu");
+           
             var q = require('q');
-            var localConfig = require('./local-config.js');
+            var open = null;
+            var merge = null;
+            var restClient = null;
+                        
+            var config = null
+            var controlTipsShown = false;
             
             q.Promise(function(resolve, reject){
-                var restClient = require('simple-get');            
+                localConfig = require('./local-config.js');
+                restClient = require('simple-get'); 
+
                 toastr["info"]("Retrieving remote configuration...");
                 restClient.concat(localConfig.remoteConfigUrl, function (err, res, data) {
                     try{
                         if (typeof err === 'undefined' || err === null) {
                             let remoteConfig = JSON.parse(data.toString('utf8'));
-                            if(typeof remoteConfig !== 'undefined' && remoteConfig !== null && typeof remoteConfig.streamUrl !== 'undefined' && remoteConfig.streamUrl !== null){
-                                resolve({ isSuccess: true, streamUrl: remoteConfig.streamUrl});
+                            if(typeof remoteConfig !== 'undefined' && remoteConfig !== null){
+                                resolve(remoteConfig);
                                 return;
                             }
                         }
                                        
-                        resolve({ isSuccess: false, streamUrl: localConfig.fallbackStreamUrl });
+                        resolve(null);
                     }
                     catch(e){                                         
-                        resolve({ isSuccess: false, streamUrl: localConfig.fallbackStreamUrl });
+                        resolve(null);
                     }
                 });
-            }).then(function (remoteStreamUrlResult) {
-                streamUrl = remoteStreamUrlResult.streamUrl;
+            }).then(function (remoteConfig) {
+                open = require('opn');
+                merge = require('merge');                
 
-                loader.close();
-
-                if(!remoteStreamUrlResult.isSuccess){
-                    toastr["warning"]("Unable to retrieve remote stream url setting. Using fallback stream url instead...");
+                if(remoteConfig !== null){
+                    config = merge.recursive(true, localConfig, remoteConfig);
+                }
+                else{
+                    config = localConfig;
+                    toastr["warning"]("Unable to retrieve remote configuration. Please check your internet. Falling back to local configuration instead...");
                 }
 
                 $.fn.extend({
@@ -114,8 +137,8 @@
                 var backgroundChangeHandle = null;
                 var bgImageNumber = 2;
                 btnPlay.addEventListener('click', function() {
-                    if(audio.src !== streamUrl){        
-                        audio.src = streamUrl;
+                    if(audio.src !== config.streamUrl){        
+                        audio.src = config.streamUrl;
                         audio.load();
                         audio.play();                        
                     }
@@ -154,21 +177,55 @@
                 });
 
                 audio.addEventListener('error', function(){
-                    if(audio.src === streamUrl){
+                    if(audio.src === config.streamUrl){
                         stop();
 
                         toastr["error"]("Oops! Unable to connect. Please check whether you are properly connected to the internet. If you are, then you may be behind a firewall which is blocking the Fox 91.4 audio stream. That's not cool man. Not cool at all.");
                     }
                 });
 
-                menu.addEventListener('click', function(){
-                    var aboutMessage = '<a target="_blank" href="https://github.com/harindaka/fox-desktop">Fox Desktop v' + localConfig.version + '</a></br><a target="_blank" href="https://github.com/harindaka/fox-desktop">(https://github.com/harindaka/fox-desktop)</a></br><br/>An unofficial cross platform streaming desktop client for Sri Lanka\'s Fox 91.4 FM Radio. This program is free software licensed and distributed under <a target="_blank" href="http://www.gnu.org/licenses/gpl-3.0.en.html">GNU GPL v3</a> with absolutely no warranties.<br/></br>Developed by <a target="_blank" href="https://www.linkedin.com/in/harindaka">Hemal Harindaka</a><br/><a target="_blank" href="https://www.linkedin.com/in/harindaka">(https://www.linkedin.com/in/harindaka)</a>';
+                aboutMenu.addEventListener('mouseover', function(){
+                    var aboutMessage = '<u>Fox Desktop v' + config.version + '</u><br/>An unofficial cross platform streaming desktop client for Sri Lanka\'s Fox 91.4 FM Radio. This program is free software licensed and distributed under GNU GPL v3 with absolutely no warranties.<br/></br>Developed by <a target="_blank" href="https://www.linkedin.com/in/harindaka">Hemal Harindaka</a>';
                     toastr["info"](aboutMessage);
                 });
-                
+
+                aboutMenu.addEventListener('click', function(){
+                    open(config.authorUrl);
+                });
+
+                sourceMenu.addEventListener('click', function(){
+                    open(config.projectUrl);
+                });
+
+                licenseMenu.addEventListener('click', function(){
+                    open(config.licenseUrl);
+                });
+
+                likeMenu.addEventListener('click', function(){
+                    open(config.fbPageUrl);
+                });
+
+                fbShareMenu.addEventListener('click', function(){
+                    open(config.fbShareUrl);
+                });
+
+                twitterShareMenu.addEventListener('click', function(){                    
+                    open(config.twitterShareUrl);
+                });
+
+                gplusShareMenu.addEventListener('click', function(){                    
+                    open(config.gplusShareUrl);
+                });
+
+                linkedShareMenu.addEventListener('click', function(){
+                    open(config.linkedInShareUrl);
+                });
+
+                loader.close();
                 toastr["info"]("Hit the button to start streaming awesomeness...");
 
             }).catch(function(e){
+                loader.close();
                 toastr["error"]("Oops! An unhandled error occurred. You may need to restart the application for it to behave as intended. Error details: " + e.message);
             }).done();            
             
