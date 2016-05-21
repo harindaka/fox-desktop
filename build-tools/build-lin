@@ -3,7 +3,7 @@ set -e
 
 PROJECT_PATH=$(dirname "$(dirname $0)")
 
-VERSION=1.0
+VERSION=1.1
 ICON_PATH="$PROJECT_PATH/images/fox.ico"
 OUT_PATH="$PROJECT_PATH/bin"
 

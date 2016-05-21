@@ -2,7 +2,7 @@ cd %~dp0..
 set PROJECT_PATH=%CD%
 cd %~dp0
 
-SET VERSION=1.0
+SET VERSION=1.1
 SET ICON_PATH=%PROJECT_PATH%\images\fox.ico
 SET OUT_PATH=%PROJECT_PATH%\bin
 

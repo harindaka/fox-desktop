@@ -1,5 +1,5 @@
 module.exports = {
-	"version": "1.0",
+	"version": "1.1",
 	"remoteConfigUrl": "https://raw.githubusercontent.com/harindaka/fox-desktop/master/remote-config.js",
 	"streamUrl": "http://72.46.136.154:7061/;stream.mp3",
 	"authorUrl": "https://www.linkedin.com/in/harindaka",
