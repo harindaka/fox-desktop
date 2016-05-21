@@ -31,8 +31,8 @@ Downloads
 > **Mac:**
 
 > - Sorry. Mac support is coming soon. As soon as I can get my hands on a mac that is. Stay tuned...
-   
-
+  
+  
 **Step 2:** Extract the zip archive to your preferred location and start the application as follows
 
 > **Windows:**
