@@ -48,3 +48,8 @@ Downloads
 
 >Tip: If the application does not launch you may need to allow the file to execute by typing the command `chmod +x ./foxdesktop`
 
+**Step 3:** Enjoy!
+
+Issues
+-------------
+Use the following link to report bugs or suggestions: [https://github.com/harindaka/fox-desktop/issues](https://github.com/harindaka/fox-desktop/issues)
