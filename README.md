@@ -16,15 +16,15 @@ Downloads
 
 > **Windows:**
 
-> - 32 bit: 
-> - 64 bit: 
+> - 32 bit: [fox-desktop-v1.1-win32-ia32.zip](https://github.com/harindaka/fox-desktop/releases/download/v1.1/fox-desktop-v1.1-win32-ia32.zip)
+> - 64 bit: [fox-desktop-v1.1-win32-x64.zip](https://github.com/harindaka/fox-desktop/releases/download/v1.1/fox-desktop-v1.1-win32-x64.zip)
 
 > Tip: If you are not sure which one to download, the 32 bit application should work in most cases.
 
 > **Linux:**
 
-> - 32 bit: 
-> - 64 bit: 
+> - 32 bit: [fox-desktop-v1.1-linux-ia32.zip](https://github.com/harindaka/fox-desktop/releases/download/v1.1/fox-desktop-v1.1-linux-ia32.zip)
+> - 64 bit: [fox-desktop-v1.1-linux-x64.zip](https://github.com/harindaka/fox-desktop/releases/download/v1.1/fox-desktop-v1.1-linux-x64.zip)
 
 > Tip: If you are not sure which one to download, try the 64 bit. Chances are you are using a recently built PC which is 64 bit in most cases.
 
