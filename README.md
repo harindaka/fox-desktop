@@ -12,7 +12,7 @@ For downloading the latest release of Fox Desktop Client which is relevant to yo
 Downloads
 -------------
 
-Step 1. Click on the relevant link to download the zip archive containing the application.
+**Step 1:** Click on the relevant link to download the zip archive containing the application.
 
 > **Windows:**
 
@@ -29,9 +29,11 @@ Step 1. Click on the relevant link to download the zip archive containing the ap
 > Tip: If you are not sure which one to download, try the 64 bit. Chances are you are using a recently built PC which is 64 bit in most cases.
 
 > **Mac:**
-Sorry. Mac support is coming soon. As soon as I can get my hands on a mac that is. Stay tuned...
+
+> - Sorry. Mac support is coming soon. As soon as I can get my hands on a mac that is. Stay tuned...
    
-Step 2: Extract the zip archive to your preferred location and start the application as follows
+
+**Step 2:** Extract the zip archive to your preferred location and start the application as follows
 
 > **Windows:**
 
