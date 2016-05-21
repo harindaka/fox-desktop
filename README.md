@@ -1,7 +1,7 @@
 Fox Desktop
 ===========
 
-Welcome to the Fox Desktop Client Project. Fox Desktop is completely free and open source. You can also view the source online from here or clone it to your desktop. 
+Welcome to the Fox Desktop Client Project. Fox Desktop is a free and opensource unofficial cross platform streaming desktop client for Sri Lanka's Fox 91.4 FM Radio. You can also view the source online from here or clone it to your desktop. 
 
 For downloading the latest release of Fox Desktop Client which is relevant to your operating system, refer the section below.
 
