@@ -30,7 +30,7 @@ Downloads
 
 > **Mac:**
 
-> - Sorry. Mac support is coming soon. As soon as I can get my hands on a mac that is. Stay tuned...
+> - 64 bit: [fox-desktop-v1.1-darwin-x64.zip](https://github.com/harindaka/fox-desktop/releases/download/v1.1/fox-desktop-v1.1-darwin-x64.zip)
   
   
 **Step 2:** Extract the zip archive to your preferred location and start the application as follows
@@ -47,6 +47,10 @@ Downloads
 > `./foxdesktop`  
 
 >Tip: If the application does not launch you may need to allow the file to execute by typing the command `chmod +x ./foxdesktop`
+
+> **Mac:**
+
+> - Browse into the extracted folder in Finder and double click the app file titled "fox-desktop" to launch the application.
 
 **Step 3:** Enjoy!
 
