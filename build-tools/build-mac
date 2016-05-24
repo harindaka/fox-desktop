@@ -10,9 +10,5 @@ OUT_PATH="$PROJECT_PATH/bin"
 rm -rf "$OUT_PATH"
 
 "$PROJECT_PATH/node_modules/.bin/electron-packager" "$PROJECT_PATH" --platform=darwin --arch=x64 --overwrite --icon="$ICON_PATH" --out="$OUT_PATH" --version-string.CompanyName="Hemal Harindaka" --version-string.ProductName="Fox 91.4 Desktop Client" --version-string.ProductVersion="$VERSION" --ignore="$OUT_PATH" --ignore="$PROJECT_PATH/node_modules/electron-packager" --ignore="$PROJECT_PATH/node_modules/electron-prebuilt" --ignore="$PROJECT_PATH/build-tools" 
-mv "$OUT_PATH/fox-desktop-darwin-x64" "$OUT_PATH/fox-desktop-darwin-x64-temp"
-mkdir "$OUT_PATH/fox-desktop-darwin-x64"
-mv "$OUT_PATH/fox-desktop-darwin-x64-temp" "$OUT_PATH/fox-desktop-darwin-x64/bin"
-cp -f "$PROJECT_PATH/build-tools/foxdesktop" "$OUT_PATH/fox-desktop-darwin-x64/"
 node "$PROJECT_PATH/build-tools/build-helper-zip.js" "$OUT_PATH/fox-desktop-darwin-x64" "$OUT_PATH/fox-desktop-v$VERSION-darwin-x64.zip"
 
