@@ -3,14 +3,11 @@
     ng.core.Component({
       selector: 'app-component',
       directives: [
-        app.BooksComponent, 
-        app.MainViewComponent
+        app.HomeComponent
       ],
       template: `
-      	<h1>My First Angular 2 App</h1>
-      	<books>Loading Books...</books>
-        <main-view-component>Loading Main View...</main-view-component>
-      	`
+      	<home-component></home-component>
+      `
     })
     .Class({
       constructor: function() {}
