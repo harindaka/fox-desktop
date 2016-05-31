@@ -3,3 +3,5 @@ app/**/*.js.map
 bin/
 node_modules/
 typings/
+fox-desktop.sublime-workspace
+
