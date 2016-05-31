@@ -12,11 +12,10 @@
 	}).Class({
 		constructor: function(){
 			this.visible = false;
+			this.show = function(){
+				this.visible = true;
+			}
 		},
-
-		show: function(){
-			this.visible = true;
-		}
 	});
 
 	console.log(app.CommonLoaderComponent);

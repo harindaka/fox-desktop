@@ -1,6 +1,7 @@
 <html>
   <head>
     <title>Fox 91.4 Desktop Client</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <!-- BEGIN: Load CSS -->
@@ -12,34 +13,19 @@
 
     <!-- BEGIN: Load Angular Related Libraries -->
     <script src="node_modules/core-js/client/shim.min.js"></script>
-
     <script src="node_modules/zone.js/dist/zone.js"></script>
     <script src="node_modules/reflect-metadata/Reflect.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
 
-    <script src="node_modules/rxjs/bundles/Rx.umd.js"></script>
-    <script src="node_modules/@angular/core/core.umd.js"></script>
-    <script src="node_modules/@angular/common/common.umd.js"></script>
-    <script src="node_modules/@angular/compiler/compiler.umd.js"></script>
-    <script src="node_modules/@angular/platform-browser/platform-browser.umd.js"></script>
-    <script src="node_modules/@angular/platform-browser-dynamic/platform-browser-dynamic.umd.js"></script>
-     <!-- END: Load Angular Related Libraries -->
-
-    <!-- BEGIN: Load Angular Components -->
-    <script src='app/common/common-loader-component.js'></script>
-
-    <script src='app/home/home-play-button-component.js'></script>
-    <script src='app/home/home-menu-component.js'></script>
-    <script src='app/home/home-heading-component.js'></script>
-    <script src='app/home/home-audio-component.js'></script>
-    <script src='app/home/home-component.js'></script>
-    
-    <script src='app/app-component.js'></script>
-    <script src='app/angular-application.js'></script>
-    <!-- END: Load Angular Components -->       
+    <script src="systemjs.config.js"></script>
+    <script>
+      System.import('app').catch(function(err){ console.error(err); });
+    </script>
+    <!-- END: Load Angular Related Libraries -->       
   </head>
   
   <body class="body_background">    
-    <app-component>Loading...</app-component>    
+    <app>Loading...</app>    
   </body>
 
 </html>
