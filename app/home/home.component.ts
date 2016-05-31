@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { HomeHeadingComponent } from './home/home-heading.component';
-import { HomeAudioComponent } from './home/home-audio.component';
-import { HomePlayButtonComponent } from './home/home-play-button.component';
-import { HomeMenuComponent } from './home/home-menu.component';
+import { HomeHeadingComponent } from './home-heading.component';
+import { HomeAudioComponent } from './home-audio.component';
+import { HomePlayButtonComponent } from './home-play-button.component';
+import { HomeMenuComponent } from './home-menu.component';
 
 @Component({
   selector: 'home',
