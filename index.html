@@ -11,6 +11,10 @@
     <link rel="stylesheet" type="text/css" href="node_modules/toastr/build/toastr.css">
     <!-- BEGIN: Load CSS -->
 
+    <!-- BEGIN: Load Third Party JS Libraries -->
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <!-- BEGIN: Load Third Party JS Libraries --> 
+
     <!-- BEGIN: Load Angular Related Libraries -->
     <script src="node_modules/core-js/client/shim.min.js"></script>
     <script src="node_modules/zone.js/dist/zone.js"></script>
@@ -21,10 +25,12 @@
     <script>
       System.import('app').catch(function(err){ console.error(err); });
     </script>
+
+    <script src="node_modules/rxjs/bundles/Rx.js"></script>
     <!-- END: Load Angular Related Libraries -->  
 
     <!-- BEGIN: Load Third Party JS Libraries -->
-    <script src="node_modules/rxjs/bundles/Rx.js"></script>
+    <script src="node_modules/toastr/build/toastr.min.js"></script>
     <!-- BEGIN: Load Third Party JS Libraries -->         
   </head>
   

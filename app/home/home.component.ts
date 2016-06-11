@@ -9,6 +9,10 @@ import { HomeMenuComponent } from './home-menu.component';
 
 import { CommonLoaderService } from '../common/loader/common-loader.service';
 
+declare var $: any;
+declare var jQuery: any;
+declare var toastr: any;
+
 @Component({
   selector: 'home',
   directives: [
@@ -31,16 +35,12 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(){
-    let showLoader: boolean = true;
-    setInterval(()=> {
-      if(showLoader){
-        this._commonLoaderService.showLoader();
-      }
-      else{
-        this._commonLoaderService.hideLoader();
-      }
+    this._commonLoaderService.showLoader();
 
-      showLoader = !showLoader;
-    }, 3000);    
+    toastr.options.preventDuplicates = true;
+    toastr.options.positionClass = "toast-bottom-right";
+    toastr["info"]("Retrieving remote configuration...");
+
+    this._commonLoaderService.hideLoader();
   }
 }
