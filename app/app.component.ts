@@ -5,6 +5,10 @@ import { CommonLoaderComponent } from './common/loader/common-loader.component';
 
 import { CommonLoaderService } from './common/loader/common-loader.service';
 
+declare var $: any;
+declare var jQuery: any;
+declare var toastr: any;
+
 @Component({
   selector: 'app',
   directives: [
