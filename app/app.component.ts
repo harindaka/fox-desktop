@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
+import 'rxjs/Rx';
 import { HomeComponent } from './home/home.component';
 import { CommonLoaderComponent } from './common/loader/common-loader.component';
+
+import { CommonLoaderService } from './common/loader/common-loader.service';
 
 @Component({
   selector: 'app',
@@ -9,16 +12,19 @@ import { CommonLoaderComponent } from './common/loader/common-loader.component';
   	HomeComponent
   ],
   template: ` 
-  	<common-loader [isVisible]="loader.isVisible"></common-loader>  
-    <home [loader]="loader"></home>    
-  `  
+  	<common-loader></common-loader>  
+    <home></home>    
+  `, 
+  providers: [
+    CommonLoaderService
+  ] 
 })
 export class AppComponent{ 
 	loader: any;
 	
 	constructor(){
 		this.loader = {
-			isVisible: false
+			isVisible: true
 		};
 	}
 } 

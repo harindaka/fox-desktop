@@ -7,6 +7,8 @@ import { HomeAudioComponent } from './home-audio.component';
 import { HomePlayButtonComponent } from './home-play-button.component';
 import { HomeMenuComponent } from './home-menu.component';
 
+import { CommonLoaderService } from '../common/loader/common-loader.service';
+
 @Component({
   selector: 'home',
   directives: [
@@ -23,16 +25,22 @@ import { HomeMenuComponent } from './home-menu.component';
   `  
 })
 export class HomeComponent implements OnInit { 
-  @Input() loader: any;
-
-  constructor(){
+  
+  constructor(private _commonLoaderService: CommonLoaderService){
     
   }
 
   ngOnInit(){
-    //this.loader.isVisible = true;
-    // setTimeout(()=> {
-    //   this.loader.isVisible = false;
-    // }, 7000);
+    let showLoader: boolean = true;
+    setInterval(()=> {
+      if(showLoader){
+        this._commonLoaderService.showLoader();
+      }
+      else{
+        this._commonLoaderService.hideLoader();
+      }
+
+      showLoader = !showLoader;
+    }, 3000);    
   }
 }

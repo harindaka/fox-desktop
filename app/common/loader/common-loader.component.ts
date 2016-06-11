@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { Input } from '@angular/core';
 import { OnInit } from '@angular/core';
+import { CommonLoaderService } from './common-loader.service';
 
 @Component({
 	selector: 'common-loader',
 	template: `
-		<div *ngIf="isVisible" class="loader-modal">
+		<div *ngIf="_isVisible" class="loader-modal">
       		<div class="loader-modal-overlay"></div>
       		<div class="loader-vertical-offset">
       			<div class="loader">Loading...</div>
@@ -14,12 +15,16 @@ import { OnInit } from '@angular/core';
 	`
 })
 export class CommonLoaderComponent implements OnInit {
-	
-	@Input() isVisible;
+		
+	_isVisible: boolean = false;
 
-	constructor(){
-		this.isVisible = false;
+	constructor(private _commonLoaderService: CommonLoaderService) {
+		
 	}
 
-	ngOnInit(){}
+	ngOnInit(){
+		this._commonLoaderService.getLoaderVisibility().subscribe((visibleState)=>{
+			this._isVisible = visibleState;
+		});
+	}
 }
