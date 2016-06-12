@@ -37,8 +37,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(){
     this._loaderService.showLoader();
-
-    //this._nativeInterfaceService.alert('testHello');
+    
     let toastr = this._externLibsService.toastr();
 
     toastr.options.preventDuplicates = true;
