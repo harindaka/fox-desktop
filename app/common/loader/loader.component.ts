@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { Input } from '@angular/core';
 import { OnInit } from '@angular/core';
-import { CommonLoaderService } from './common-loader.service';
+import { LoaderService } from './loader.service';
 
 @Component({
-	selector: 'common-loader',
+	moduleId: module.id,
+	selector: 'loader',
+	styleUrls: ['loader.style.css'],
 	template: `
 		<div *ngIf="_isVisible" class="loader-modal">
       		<div class="loader-modal-overlay"></div>
@@ -14,16 +16,16 @@ import { CommonLoaderService } from './common-loader.service';
       	</div>
 	`
 })
-export class CommonLoaderComponent implements OnInit {
+export class LoaderComponent implements OnInit {
 		
 	_isVisible: boolean = false;
 
-	constructor(private _commonLoaderService: CommonLoaderService) {
+	constructor(private _loaderService: LoaderService) {
 		
 	}
 
 	ngOnInit(){
-		this._commonLoaderService.getLoaderVisibility().subscribe((visibleState)=>{
+		this._loaderService.getLoaderVisibility().subscribe((visibleState)=>{
 			this._isVisible = visibleState;
 		});
 	}

@@ -1,26 +1,26 @@
 import { Component } from '@angular/core';
 import 'rxjs/Rx';
 import { HomeComponent } from './home/home.component';
-import { CommonLoaderComponent } from './common/loader/common-loader.component';
+import { LoaderComponent } from './common/loader/loader.component';
 
-import { CommonLoaderService } from './common/loader/common-loader.service';
-
-declare var $: any;
-declare var jQuery: any;
-declare var toastr: any;
+import { LoaderService } from './common/loader/loader.service';
+import { NativeInterfaceService } from './common/native-interface/native-interface.service';
+import { ExternLibsService } from './common/extern-libs/extern-libs.service';
 
 @Component({
   selector: 'app',
   directives: [
-  	CommonLoaderComponent,
+  	LoaderComponent,
   	HomeComponent
   ],
   template: ` 
-  	<common-loader></common-loader>  
+  	<loader></loader>  
     <home></home>    
   `, 
   providers: [
-    CommonLoaderService
+    LoaderService,
+    NativeInterfaceService,
+    ExternLibsService
   ] 
 })
 export class AppComponent{ 

@@ -7,7 +7,8 @@ import { HomeAudioComponent } from './home-audio.component';
 import { HomePlayButtonComponent } from './home-play-button.component';
 import { HomeMenuComponent } from './home-menu.component';
 
-import { CommonLoaderService } from '../common/loader/common-loader.service';
+import { LoaderService } from '../common/loader/loader.service';
+import { ExternLibsService } from '../common/extern-libs/extern-libs.service';
 
 @Component({
   selector: 'home',
@@ -26,17 +27,23 @@ import { CommonLoaderService } from '../common/loader/common-loader.service';
 })
 export class HomeComponent implements OnInit { 
   
-  constructor(private _commonLoaderService: CommonLoaderService){
+  constructor(
+    private _loaderService: LoaderService,
+    private _externLibsService: ExternLibsService
+    ){
     
   }
 
   ngOnInit(){
-    this._commonLoaderService.showLoader();
+    this._loaderService.showLoader();
+
+    //this._nativeInterfaceService.alert('testHello');
+    let toastr = this._externLibsService.toastr();
 
     toastr.options.preventDuplicates = true;
     toastr.options.positionClass = "toast-bottom-right";
     toastr["info"]("Retrieving remote configuration...");
 
-    this._commonLoaderService.hideLoader();
+    this._loaderService.hideLoader();
   }
 }

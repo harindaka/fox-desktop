@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
 @Injectable()
-export class CommonLoaderService{
+export class LoaderService{
 
 	_isVisible: Subject<boolean> = null;
 
