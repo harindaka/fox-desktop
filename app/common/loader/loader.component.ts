@@ -4,7 +4,7 @@ import { OnInit } from '@angular/core';
 import { LoaderService } from './loader.service';
 
 @Component({
-	moduleId: module.id,
+	moduleId: module.id,	
 	selector: 'loader',
 	styleUrls: ['loader.style.css'],
 	template: `

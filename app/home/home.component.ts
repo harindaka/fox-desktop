@@ -11,6 +11,7 @@ import { LoaderService } from '../common/loader/loader.service';
 import { ExternLibsService } from '../common/extern-libs/extern-libs.service';
 
 @Component({
+  moduleId: module.id,
   selector: 'home',
   directives: [
   	HomeHeadingComponent,

@@ -8,6 +8,7 @@ import { NativeInterfaceService } from './common/native-interface/native-interfa
 import { ExternLibsService } from './common/extern-libs/extern-libs.service';
 
 @Component({
+  moduleId: module.id,
   selector: 'app',
   directives: [
   	LoaderComponent,
